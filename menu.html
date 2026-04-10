@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кофейня "Теплый Зерновой" - Меню</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Теплый Зерновой</a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="menu.html">Меню</a>
+        <a href="cart.html">Корзина <span id="cart-count-badge">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container page-content">
+    <h1>Меню кофейни</h1>
+    <div class="controls">
+      <label class="control-item">
+        <span>Поиск</span>
+        <input id="search-input" type="text" placeholder="Введите название">
+      </label>
+      <label class="control-item">
+        <span>Категория</span>
+        <select id="category-filter">
+          <option value="all">Все позиции</option>
+          <option value="coffee">Кофе</option>
+          <option value="dessert">Десерты</option>
+        </select>
+      </label>
+      <label class="control-item">
+        <span>Сортировка</span>
+        <select id="sort-filter">
+          <option value="default">По умолчанию</option>
+          <option value="price-asc">Сначала дешевле</option>
+          <option value="price-desc">Сначала дороже</option>
+          <option value="name-asc">По названию А-Я</option>
+        </select>
+      </label>
+    </div>
+    <p id="menu-result-count" class="result-count"></p>
+    <div id="menu-grid" class="grid"></div>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Автор: Озерова Елизавета Павловна</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script src="menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Кофейня "Теплый Зерновой" - Главная</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="container nav-wrap">
+      <a class="logo" href="index.html">Теплый Зерновой</a>
+      <nav class="nav">
+        <a href="index.html">Главная</a>
+        <a href="menu.html">Меню</a>
+        <a href="cart.html">Корзина <span id="cart-count-badge">0</span></a>
+      </nav>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container">
+      <h1>Кофейня "Теплый Зерновой"</h1>
+      <p>Свежесваренный кофе, десерты и уютная атмосфера каждый день</p>
+      <a class="hero-btn" href="menu.html">Перейти в меню</a>
+      <p class="author">Автор: Озерова Елизавета Павловна</p>
+    </div>
+  </section>
+
+  <main class="container page-content">
+    <section>
+      <h2>Популярные позиции</h2>
+      <div id="featured-grid" class="grid"></div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <p>Спасибо за посещение нашей кофейни!</p>
+    </div>
+  </footer>
+
+  <div id="toast" class="toast" aria-live="polite"></div>
+  <script src="data.js"></script>
+  <script src="common.js"></script>
+  <script src="home.js"></script>
+</body>
+</html>
