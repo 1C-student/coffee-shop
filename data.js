@@ -54,15 +54,6 @@ const PRODUCTS = [
     image: "https://images.unsplash.com/photo-1571877227200-a0d98ea607e9?auto=format&fit=crop&w=900&q=80"
   },
   {
-    id: "croissant",
-    name: "Круассан",
-    category: "dessert",
-    price: 170,
-    shortDescription: "Свежая выпечка с хрустящей корочкой.",
-    description: "Классический французский круассан с нежной слоеной текстурой и сливочным вкусом.",
-    image: "https://images.unsplash.com/photo-1509440159596-0249088772ff?auto=format&fit=crop&w=900&q=80"
-  },
-  {
     id: "macaron",
     name: "Макарон",
     category: "dessert",

@@ -1,4 +1,5 @@
 const STORAGE_KEY = "coffeeShopCart";
+const FAVORITES_KEY = "coffeeShopFavorites";
 
 function loadCart() {
   const raw = localStorage.getItem(STORAGE_KEY);
@@ -17,6 +18,40 @@ function loadCart() {
 
 function saveCart(cart) {
   localStorage.setItem(STORAGE_KEY, JSON.stringify(cart));
+}
+
+function loadFavorites() {
+  const raw = localStorage.getItem(FAVORITES_KEY);
+  if (!raw) {
+    return [];
+  }
+  try {
+    const parsed = JSON.parse(raw);
+    return Array.isArray(parsed) ? parsed : [];
+  } catch (error) {
+    return [];
+  }
+}
+
+function saveFavorites(favorites) {
+  localStorage.setItem(FAVORITES_KEY, JSON.stringify(favorites));
+}
+
+function isFavorite(productId) {
+  return loadFavorites().includes(productId);
+}
+
+function toggleFavorite(productId) {
+  const favorites = loadFavorites();
+  const index = favorites.indexOf(productId);
+  if (index >= 0) {
+    favorites.splice(index, 1);
+    saveFavorites(favorites);
+    return false;
+  }
+  favorites.push(productId);
+  saveFavorites(favorites);
+  return true;
 }
 
 function getCartCount(cart) {

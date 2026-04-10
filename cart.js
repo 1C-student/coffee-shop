@@ -4,6 +4,11 @@ const cartTotal = document.getElementById("cart-total");
 const clearCartButton = document.getElementById("clear-cart");
 const exportCartButton = document.getElementById("export-cart");
 const checkoutForm = document.getElementById("checkout-form");
+const promoInput = document.getElementById("promo-code");
+const applyPromoButton = document.getElementById("apply-promo");
+const discountLine = document.getElementById("discount-line");
+
+let discountPercent = 0;
 
 function changeQuantity(index, delta) {
   const cart = loadCart();
@@ -36,10 +41,10 @@ function renderCartPage() {
   const cart = loadCart();
   cartItems.innerHTML = "";
 
-  let total = 0;
+  let rawTotal = 0;
 
   cart.forEach((item, index) => {
-    total += item.price * item.quantity;
+    rawTotal += item.price * item.quantity;
 
     const li = document.createElement("li");
     li.innerHTML = `
@@ -60,7 +65,11 @@ function renderCartPage() {
     cartItems.appendChild(li);
   });
 
+  const discountValue = Math.round(rawTotal * (discountPercent / 100));
+  const total = rawTotal - discountValue;
   cartTotal.textContent = String(total);
+  discountLine.textContent =
+    discountPercent > 0 ? `Скидка ${discountPercent}%: -${discountValue} ₽` : "";
   cartEmpty.style.display = cart.length === 0 ? "block" : "none";
 }
 
@@ -101,6 +110,21 @@ checkoutForm.addEventListener("submit", (event) => {
   downloadReceipt(text);
   showToast("Заказ оформлен");
   checkoutForm.reset();
+});
+
+applyPromoButton.addEventListener("click", () => {
+  const code = promoInput.value.trim().toUpperCase();
+  if (code === "COFFEE10") {
+    discountPercent = 10;
+    showToast("Промокод применен");
+  } else if (code === "SWEET15") {
+    discountPercent = 15;
+    showToast("Промокод применен");
+  } else {
+    discountPercent = 0;
+    showToast("Промокод не найден");
+  }
+  renderCartPage();
 });
 
 renderCartPage();
