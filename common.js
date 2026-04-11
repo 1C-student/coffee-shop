@@ -117,11 +117,17 @@ function createReceiptText(customerName, customerPhone, customerComment, cart) {
 }
 
 function downloadReceipt(content) {
-  const blob = new Blob([content], { type: "text/plain;charset=utf-8" });
+  const encoder = new TextEncoder();
+  const body = encoder.encode(content);
+  const bom = new Uint8Array([0xef, 0xbb, 0xbf]);
+  const bytes = new Uint8Array(bom.length + body.length);
+  bytes.set(bom, 0);
+  bytes.set(body, bom.length);
+  const blob = new Blob([bytes], { type: "text/plain;charset=utf-8" });
   const url = URL.createObjectURL(blob);
   const link = document.createElement("a");
   link.href = url;
-  link.download = "coffee-order-receipt.txt";
+  link.download = "chek-zakaza-utf8.txt";
   document.body.appendChild(link);
   link.click();
   link.remove();
@@ -141,6 +147,28 @@ function showToast(message) {
   showToast.timeoutId = window.setTimeout(() => {
     toast.classList.remove("show");
   }, 1800);
+}
+
+function enhanceImages(root = document) {
+  const fallback =
+    "data:image/svg+xml;charset=UTF-8," +
+    encodeURIComponent(
+      "<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500'>" +
+        "<rect width='100%' height='100%' fill='#efe3d8'/>" +
+        "<text x='50%' y='50%' dominant-baseline='middle' text-anchor='middle' " +
+        "font-family='Arial' font-size='28' fill='#7a5a45'>Изображение недоступно</text>" +
+      "</svg>"
+    );
+
+  root.querySelectorAll("img").forEach((img) => {
+    img.addEventListener(
+      "error",
+      () => {
+        img.src = fallback;
+      },
+      { once: true }
+    );
+  });
 }
 
 updateCartBadge();
